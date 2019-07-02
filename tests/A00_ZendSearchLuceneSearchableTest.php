@@ -8,24 +8,24 @@ class A00_ZendSearchLuceneSearchableTest extends SapphireTest {
 
     public function testEnable() {
         // test for baddies in _config.php
-        if ( Object::has_extension('ContentController', 'ZendSearchLuceneContentController') ) {
+        if ( ContentController::has_extension('ZendSearchLuceneContentController') ) {
             echo '<p>Please remove calls to ZendSearchLuceneSearchable::enable() from your _config.php file before running tests.</p>';
             die();
         }
 
         // Setup
-        Object::remove_extension('ContentController', 'ZendSearchLuceneContentController');
-        Object::remove_extension('SiteConfig', 'ZendSearchLuceneSiteConfig');
-        Object::remove_extension('LeftAndMain', 'ZendSearchLuceneCMSDecorator');
-        Object::remove_extension('SiteTree', 'ZendSearchLuceneSearchable');
-        Object::remove_extension('File', 'ZendSearchLuceneSearchable');
+        ContentController::remove_extension('ZendSearchLuceneContentController');
+        SiteConfig::remove_extension('ZendSearchLuceneSiteConfig');
+        LeftAndMain::remove_extension('ZendSearchLuceneCMSDecorator');
+        SiteTree::remove_extension('ZendSearchLuceneSearchable');
+        File::remove_extension('ZendSearchLuceneSearchable');
 
         // Are we fresh?
-        $this->assertFalse( Object::has_extension('ContentController', 'ZendSearchLuceneContentController') );
-		$this->assertFalse( Object::has_extension('SiteConfig', 'ZendSearchLuceneSiteConfig') );
-		$this->assertFalse( Object::has_extension('LeftAndMain', 'ZendSearchLuceneCMSDecorator') );
-        $this->assertFalse( Object::has_extension('SiteTree', 'ZendSearchLuceneSearchable') );
-        $this->assertFalse( Object::has_extension('File', 'ZendSearchLuceneSearchable') );
+        $this->assertFalse( ContentController::has_extension('ZendSearchLuceneContentController') );
+		$this->assertFalse( SiteConfig::has_extension('ZendSearchLuceneSiteConfig') );
+		$this->assertFalse( LeftAndMain::has_extension('ZendSearchLuceneCMSDecorator') );
+        $this->assertFalse( SiteTree::has_extension('ZendSearchLuceneSearchable') );
+        $this->assertFalse( File::has_extension('ZendSearchLuceneSearchable') );
 
         ZendSearchLuceneSearchable::$pageLength = 10;
         ZendSearchLuceneSearchable::$alwaysShowPages = 3;   
@@ -35,29 +35,29 @@ class A00_ZendSearchLuceneSearchableTest extends SapphireTest {
         ZendSearchLuceneWrapper::$indexName = 'Test';
 
         ZendSearchLuceneSearchable::enable(array());
-        $this->assertTrue( Object::has_extension('ContentController', 'ZendSearchLuceneContentController') );
-		$this->assertTrue( Object::has_extension('SiteConfig', 'ZendSearchLuceneSiteConfig') );
-		$this->assertTrue( Object::has_extension('LeftAndMain', 'ZendSearchLuceneCMSDecorator') );
-        $this->assertFalse( Object::has_extension('SiteTree', 'ZendSearchLuceneSearchable') );
-        $this->assertFalse( Object::has_extension('File', 'ZendSearchLuceneSearchable') );
+        $this->assertTrue( ContentController::has_extension('ZendSearchLuceneContentController') );
+		$this->assertTrue( SiteConfig::has_extension('ZendSearchLuceneSiteConfig') );
+		$this->assertTrue( LeftAndMain::has_extension('ZendSearchLuceneCMSDecorator') );
+        $this->assertFalse( SiteTree::has_extension('ZendSearchLuceneSearchable') );
+        $this->assertFalse( File::has_extension('ZendSearchLuceneSearchable') );
 
         ZendSearchLuceneSearchable::enable(array('File'));
-        $this->assertFalse( Object::has_extension('SiteTree', 'ZendSearchLuceneSearchable') );
-        $this->assertTrue( Object::has_extension('File', 'ZendSearchLuceneSearchable') );
+        $this->assertFalse( SiteTree::has_extension('ZendSearchLuceneSearchable') );
+        $this->assertTrue( File::has_extension('ZendSearchLuceneSearchable') );
 
         ZendSearchLuceneSearchable::enable(array('File','SiteTree'));
-        $this->assertTrue( Object::has_extension('SiteTree', 'ZendSearchLuceneSearchable') );
-        $this->assertTrue( Object::has_extension('File', 'ZendSearchLuceneSearchable') );
+        $this->assertTrue( SiteTree::has_extension('ZendSearchLuceneSearchable') );
+        $this->assertTrue( File::has_extension('ZendSearchLuceneSearchable') );
 
     }
 
     public function testGetSearchedVars() {
         // Setup
-        Object::remove_extension('ContentController', 'ZendSearchLuceneContentController');
-        Object::remove_extension('SiteConfig', 'ZendSearchLuceneSiteConfig');
-        Object::remove_extension('LeftAndMain', 'ZendSearchLuceneCMSDecorator');
-        Object::remove_extension('SiteTree', 'ZendSearchLuceneSearchable');
-        Object::remove_extension('File', 'ZendSearchLuceneSearchable');
+        ContentController::remove_extension('ZendSearchLuceneContentController');
+        SiteConfig::remove_extension('ZendSearchLuceneSiteConfig');
+        LeftAndMain::remove_extension('ZendSearchLuceneCMSDecorator');
+        SiteTree::remove_extension('ZendSearchLuceneSearchable');
+        File::remove_extension('ZendSearchLuceneSearchable');
         
         ZendSearchLuceneSearchable::$pageLength = 10;
         ZendSearchLuceneSearchable::$alwaysShowPages = 3;   
@@ -103,8 +103,8 @@ class A00_ZendSearchLuceneSearchableTest extends SapphireTest {
 
     public function testGetSearchFields() {
         // Setup
-        Object::remove_extension('SiteTree', 'ZendSearchLuceneSearchable');
-        Object::remove_extension('File', 'ZendSearchLuceneSearchable');
+        SiteTree::remove_extension('ZendSearchLuceneSearchable');
+        File::remove_extension('ZendSearchLuceneSearchable');
         
         ZendSearchLuceneSearchable::$pageLength = 10;
         ZendSearchLuceneSearchable::$alwaysShowPages = 3;   
@@ -130,8 +130,8 @@ class A00_ZendSearchLuceneSearchableTest extends SapphireTest {
 
     public function testGetExtraSearchFields() {
         // Setup
-        Object::remove_extension('SiteTree', 'ZendSearchLuceneSearchable');
-        Object::remove_extension('File', 'ZendSearchLuceneSearchable');
+        SiteTree::remove_extension('ZendSearchLuceneSearchable');
+        File::remove_extension('ZendSearchLuceneSearchable');
         
         ZendSearchLuceneSearchable::$pageLength = 10;
         ZendSearchLuceneSearchable::$alwaysShowPages = 3;   
@@ -157,8 +157,8 @@ class A00_ZendSearchLuceneSearchableTest extends SapphireTest {
 
     public function testOnAfterWrite() {
         // Setup
-        Object::remove_extension('SiteTree', 'ZendSearchLuceneSearchable');
-        Object::remove_extension('File', 'ZendSearchLuceneSearchable');
+        SiteTree::remove_extension('ZendSearchLuceneSearchable');
+        File::remove_extension('ZendSearchLuceneSearchable');
         
         ZendSearchLuceneSearchable::$pageLength = 10;
         ZendSearchLuceneSearchable::$alwaysShowPages = 3;   
@@ -191,8 +191,8 @@ class A00_ZendSearchLuceneSearchableTest extends SapphireTest {
 
     public function testOnAfterDelete() {
         // Setup
-        Object::remove_extension('SiteTree', 'ZendSearchLuceneSearchable');
-        Object::remove_extension('File', 'ZendSearchLuceneSearchable');
+        SiteTree::remove_extension('ZendSearchLuceneSearchable');
+        File::remove_extension('ZendSearchLuceneSearchable');
         
         ZendSearchLuceneSearchable::$pageLength = 10;
         ZendSearchLuceneSearchable::$alwaysShowPages = 3;   

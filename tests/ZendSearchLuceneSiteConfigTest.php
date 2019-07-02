@@ -4,11 +4,11 @@ class ZendSearchLuceneSiteConfigTest extends SapphireTest {
 
     function testUpdateCMSActions() {
         // Setup
-        Object::remove_extension('ContentController', 'ZendSearchLuceneContentController');
-        Object::remove_extension('SiteConfig', 'ZendSearchLuceneSiteConfig');
-        Object::remove_extension('LeftAndMain', 'ZendSearchLuceneCMSDecorator');
-        Object::remove_extension('SiteTree', 'ZendSearchLuceneSearchable');
-        Object::remove_extension('File', 'ZendSearchLuceneSearchable');
+        ContentController::remove_extension('ZendSearchLuceneContentController');
+        SiteConfig::remove_extension('ZendSearchLuceneSiteConfig');
+        LeftAndMain::remove_extension('ZendSearchLuceneCMSDecorator');
+        SiteTree::remove_extension('ZendSearchLuceneSearchable');
+        File::remove_extension('ZendSearchLuceneSearchable');
         
         ZendSearchLuceneSearchable::$pageLength = 10;
         ZendSearchLuceneSearchable::$alwaysShowPages = 3;   
