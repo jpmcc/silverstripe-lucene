@@ -477,10 +477,12 @@ class Zend_Search_Lucene_Search_Query_MultiTerm extends Zend_Search_Lucene_Searc
              * We don't need to check that term freq is not 0
              * Score calculation is performed only for matched docs
              */
-            if(array_key_exists($termId, $this->_termsFreqs) && array_key_exists($docId, $this->_termsFreqs[$termId])) {
-                $score += $reader->getSimilarity()->tf($this->_termsFreqs[$termId][$docId]) *
-                    $this->_weights[$termId]->getValue() *
-                    $reader->norm($docId, $term->field);
+            if(array_key_exists($termId, $this->_termsFreqs)) {
+                if(is_array($this->_termsFreqs[$termId]) && array_key_exists($docId, $this->_termsFreqs[$termId])) {
+                    $score += $reader->getSimilarity()->tf($this->_termsFreqs[$termId][$docId]) *
+                        $this->_weights[$termId]->getValue() *
+                        $reader->norm($docId, $term->field);
+                }
             }
         }
 
